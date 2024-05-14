@@ -1,0 +1,463 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMNNo1vEIonDGYa2I7Ofzsd",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Roderdesen/Im-veis-para-venda/blob/main/Im%C3%B3veis-para-venda\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "id": "w303o7is4qh2"
+      },
+      "outputs": [],
+      "source": [
+        "!pip install -q -U google-generativeai"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Instalando SDK do Google"
+      ],
+      "metadata": {
+        "id": "NCAnnPiiqTaf"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import google.generativeai as genai\n",
+        "\n",
+        "GOOGLE_API_KEY=\"AIzaSyA6qtlsW-0lbjmHGaQ8lGIPqkHjWyS-4MM\"\n",
+        "genai.configure(api_key=GOOGLE_API_KEY)"
+      ],
+      "metadata": {
+        "id": "sf_OBHwNqkZE"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "response = model.generate_content(\"Vamos aprender contúdo sobre IA. Me dê sugestões\")\n",
+        "print(response.text)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 763
+        },
+        "id": "tZLexz4_q40v",
+        "outputId": "c3bc3755-f931-483c-f7fc-2c8973ad871c"
+      },
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "**Conceitos Fundamentais**\n",
+            "\n",
+            "* O que é Inteligência Artificial (IA)?\n",
+            "* Tipos de IA: IA fraca, IA forte e IA geral\n",
+            "* Aprendizado de máquina vs. aprendizado profundo\n",
+            "* Redes neurais e aprendizado por reforço\n",
+            "\n",
+            "**Aplicações da IA**\n",
+            "\n",
+            "* Reconhecimento de imagem e processamento de linguagem natural\n",
+            "* Carros autônomos e robótica\n",
+            "* Diagnóstico médico e descoberta de medicamentos\n",
+            "* Finanças e previsão de mercado\n",
+            "* Automação e otimização de processos\n",
+            "\n",
+            "**Ética e Implicações Sociais da IA**\n",
+            "\n",
+            "* Viés e discriminação em algoritmos de IA\n",
+            "* Perda de empregos e desigualdade econômica\n",
+            "* Privacidade e vigilância\n",
+            "* Responsabilidade e regulamentação da IA\n",
+            "\n",
+            "**Tendências e Avanços em IA**\n",
+            "\n",
+            "* IA generativa (por exemplo, ChatGPT, DALL-E)\n",
+            "* Computação quântica e IA\n",
+            "* IA quântica e IA molecular\n",
+            "* IA ética e responsável\n",
+            "\n",
+            "**Recursos de Aprendizagem**\n",
+            "\n",
+            "* **Cursos online:** Coursera, edX, Udemy\n",
+            "* **Livros:** \"Inteligência Artificial: Uma Abordagem Moderna\" por Russell e Norvig, \"Aprendizado de Máquina\" por Tom Mitchell\n",
+            "* **Artigos de pesquisa:** Google Scholar, arXiv\n",
+            "* **Conferências e workshops:** NeurIPS, ICML, CVPR\n",
+            "\n",
+            "**Sugestões de Tópicos Específicos**\n",
+            "\n",
+            "* IA na indústria de saúde\n",
+            "* IA para sustentabilidade ambiental\n",
+            "* IA para educação personalizada\n",
+            "* IA e o futuro do trabalho\n",
+            "* Regulamentação e governança da IA\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Listar modelos disponíveis\n"
+      ],
+      "metadata": {
+        "id": "B5EQc6kxq9ml"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for m in genai.list_models():\n",
+        "  if 'generateContent' in m.supported_generation_methods:\n",
+        "    print(m.name)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 138
+        },
+        "id": "nJiezYxPrOob",
+        "outputId": "508f983f-0528-42d3-f3ae-59bf29d7b75e"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "models/gemini-1.0-pro\n",
+            "models/gemini-1.0-pro-001\n",
+            "models/gemini-1.0-pro-latest\n",
+            "models/gemini-1.0-pro-vision-latest\n",
+            "models/gemini-1.5-pro-latest\n",
+            "models/gemini-pro\n",
+            "models/gemini-pro-vision\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "generation_config = {\n",
+        "    \"candidate_count\": 1,\n",
+        "    \"temperature\": 0.5,\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "K5043njrtczx"
+      },
+      "execution_count": 17,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "safety_settings = {\n",
+        "    \"HARASSMENT\": \"BLOCK_NONE\",\n",
+        "    \"HATE\": \"BLOCK_NONE\",\n",
+        "    \"SEXUAL\": \"BLOCK_NONE\",\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "vAEW0cuAu0YR"
+      },
+      "execution_count": 16,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Inicializando o modelo\n"
+      ],
+      "metadata": {
+        "id": "zg-bnDOEysQv"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model = genai.GenerativeModel(model_name=\"gemini-1.0-pro\",\n",
+        "                              generation_config=generation_config,\n",
+        "                              safety_settings=safety_settings)"
+      ],
+      "metadata": {
+        "id": "ifyEJ8PmywMr"
+      },
+      "execution_count": 22,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "chat = model.start_chat(history=[])"
+      ],
+      "metadata": {
+        "id": "5dAHVJup0WLY"
+      },
+      "execution_count": 26,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "prompt = input(\"Eperando prompt:\")\n",
+        "\n",
+        "while prompt != \"fim\":\n",
+        "  response = chat.send_message(prompt)\n",
+        "  print(\"Resposta: \", response.text, \"\\n\")\n",
+        "  prompt = input(\"Esperabdo prompt: \")\n",
+        ""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Bh1dLHUD2q0i",
+        "outputId": "8404b182-cdb5-422f-deb1-004210cb2dc3"
+      },
+      "execution_count": 29,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Eperando prompt:fim\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Melhorando a visualização\n",
+        "#Código disponível em https://ai.google.dev/tutorials/python_quickstart#import_packages\n",
+        "import textwrap\n",
+        "from IPython.display import display\n",
+        "from IPython.display import Markdown\n",
+        "\n",
+        "def to_markdown(text):\n",
+        "  text = text.replace('•', '  *')\n",
+        "  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))\n",
+        "\n",
+        "#Imprimindo o histórico\n",
+        "for message in chat.history:\n",
+        "  display(to_markdown(f'**{message.role}**: {message.parts[0].text}'))\n",
+        "  print('-------------------------------------------')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 911
+        },
+        "id": "G0i81SZN7Kn9",
+        "outputId": "a7f96b09-f1c2-4ad4-9aed-7e1ad5cd6bc2"
+      },
+      "execution_count": 31,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **user**: Qual a capital do Brasil?"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **model**: Brasília"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **user**: Quantos imobiliárias tem em Florianópolis ?"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **model**: Não tenho acesso a informações em tempo real e meus dados podem estar desatualizados. Recomendo verificar fontes locais ou online para obter o número mais atualizado de imobiliárias em Florianópolis."
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **user**: Qual a capita de Santa Catarina ?"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **model**: Florianópolis"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **user**: a população desta cidade ?"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **model**: **536.884 habitantes** (estimativa do IBGE para 2023)"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **user**: Qual o perfil de clientes que compram imoveis em Florianópolis?"
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> **model**: O perfil de clientes que compram imóveis em Florianópolis é bastante diversificado, incluindo:\n> \n> * **Residentes locais:** Pessoas que moram ou trabalham em Florianópolis e buscam adquirir um imóvel para uso próprio ou investimento.\n> * **Investidores:** Indivíduos ou empresas que compram imóveis em Florianópolis como forma de investimento, visando obter renda de aluguel ou valorização do patrimônio.\n> * **Compradores de segunda residência:** Pessoas que possuem residência principal em outra cidade ou estado e adquirem um imóvel em Florianópolis para uso como casa de praia ou refúgio de férias.\n> * **Estrangeiros:** Cidadãos de outros países que buscam adquirir imóveis em Florianópolis para investimento, moradia ou lazer.\n> \n> Dentro desses grupos, existem subcategorias específicas, como:\n> \n> * **Famílias:** Buscam imóveis espaçosos, com boa infraestrutura e segurança, próximos a escolas e serviços essenciais.\n> * **Jovens profissionais:** Geralmente procuram apartamentos ou casas menores, em bairros centrais ou próximos a polos de trabalho.\n> * **Idosos:** Buscam imóveis térreos, com acessibilidade e segurança, em bairros tranquilos e próximos a serviços de saúde.\n> * **Investidores estrangeiros:** Geralmente buscam imóveis de alto padrão, em bairros nobres ou com potencial turístico.\n> \n> Devido à sua localização privilegiada, belezas naturais e economia pujante, Florianópolis atrai compradores de diferentes perfis e com objetivos diversos."
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "-------------------------------------------\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
